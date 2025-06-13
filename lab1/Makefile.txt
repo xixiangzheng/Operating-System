@@ -1,0 +1,18 @@
+simple_shell: simple_shell.c
+	gcc -o simple_shell simple_shell.c
+
+#TODO: 参照 simple_shell，增加编译 testsh 的规则
+testsh: testsh.c testdata
+	gcc -o testsh testsh.c
+
+#TODO: 添加自动化测试的lable
+.PHONY: all clean test
+
+all: simple_shell testsh
+
+clean:
+	rm -f testsh simple_shell
+
+#TODO: 参照 clean ，增加自动化测试的规则，注意自动化测试的规则是可以有依赖的
+test: simple_shell testsh
+	./testsh simple_shell
